@@ -95,7 +95,7 @@ Jensen: "I also thought that you could have presented your evidence better, and 
     ->BJIntro_FirstTime
 
 === BJIntro_WriteDown ===
-{ShowCharacter("Jensen", "left", "hopeful")}
+{ShowCharacter("Jensen", "left", "happy")}
 Bronislav: "Yes, of course. Thanks for letting me know."
 
 You write down his feedback in your notebook. He smiles happily, and walks off.
@@ -132,7 +132,7 @@ You put the pen and notebook back away. Jensen turns away ashamed by you mocking
 ->DONE
 
 === BJIntro_FirstTime ===
-{ShowCharacter("Jensen", "left", "ashamed")}
+{ShowCharacter("Jensen", "left", "uncomfy")}
 Bronislav: "This has to be your first time at a meeting like this isn't it?"
 
 You put the pen and notebook back away. Jensen turns away ashamed by you mocking his input.

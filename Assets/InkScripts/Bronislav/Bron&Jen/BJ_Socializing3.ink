@@ -353,7 +353,7 @@ Jensen: "I know we got off on the wrong foot, but I know I have and could contri
 ->BJS3_DoesntFeelRight
 
 === BJS3_KeepOnHustling ===
-{ShowCharacter("Jensen", "left", "hopeful")}
+{ShowCharacter("Jensen", "left", "happy")}
 Bronislav: "Keep on hustling Jensen, as long as you put in the work like you have been you'll go far."
 
 Jensen: "Thanks Bronislav! I appreciate it!!" 
@@ -381,7 +381,7 @@ Jensen: "Really?! Oh that would be great!! Thank you!!"
 ->BJS3_StartWorkingAgain
 
 === BJS3_OnlyDoingItForTheJob ===
-{ShowCharacter("Jensen", "left", "ashamed")}
+{ShowCharacter("Jensen", "left", "uncomfy")}
 
 ~ temp JenOpinionSocial3 = GetOpinionState("Jensen", "Bronislav")
 {JenOpinionSocial3 >= OpinionState.Good: Bronislav: "Look Jensen, you seem like a nice guy so I'll just tell you. Ivy offered me a job opportunity if I put you as a co-author. I'm putting you on here strictly for that job."} 
@@ -463,7 +463,7 @@ Jensen: "Anyways, gotta go. I'll see you later."
 ->DONE 
 
 === BJS3_GoodChance ===
-{ShowCharacter("Jensen", "left", "hopeful")}
+{ShowCharacter("Jensen", "left", "happy")}
 Bronislav: "I'd say there's a good chance. I'll let you know if something changes."
 His expression turns to excitment.
 
@@ -497,7 +497,7 @@ Jensen: "I hope you reconsider."
 ->DONE
 
 === BJS3_DoesntFeelRight ===
-{ShowCharacter("Jensen", "left", "ashamed")}
+{ShowCharacter("Jensen", "left", "uncomfy")}
 Bronislav: "It just doesn't feel right Jensen, does this not feel sketchy to you?"
 
 Jensen doesn't answer immediately, instead looking down at his coffee then taking a sip.
@@ -515,7 +515,7 @@ He walks away calmly.
 -> DONE
 
 === BJS3_ConsiderChanging ===
-{ShowCharacter("Jensen", "left", "hopeful")}
+{ShowCharacter("Jensen", "left", "happy")}
 Bronislav: "You're perseverance is definitely admirable Jensen." 
 
 You take a long pause, and sip your own coffee. 
@@ -544,7 +544,7 @@ He gets up and leaves.
 ->DONE
 
 === BJS3_MadeUpMyMind ===
-{ShowCharacter("Jensen", "left", "ashamed")}
+{ShowCharacter("Jensen", "left", "uncomfy")}
 Bronislav: "I've made up my mind Jensen, you're not getting co-authorship."
 
 His gaze goes from disappointment to guilt.

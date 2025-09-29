@@ -40,6 +40,15 @@ namespace Academical
 			var stat = m_Context.socialEngine.State
 				.GetRelationship( m_Owner.UniqueID, m_Target.UniqueID )
 				.Stats.GetStat( "Opinion" );
+			//Play Audio for success/failure
+			if ( m_Value >= 0 )
+			{
+				AudioManager.PlayDelayedSuccessSound();
+			}
+			else
+			{
+				AudioManager.PlayDelayedFailureSound();
+			}
 
 			stat.BaseValue += m_Value;
 		}

@@ -18,6 +18,11 @@ public class ButtonClick : MonoBehaviour
         AudioManager.PlayDefaultButtonSound();
     }
 
+    public void PlayDialogueSoundOnClick()
+    {
+        AudioManager.PlayDialogueButtonSound();
+    }
+
 	void OnDestroy()
 	{
         button.onClick.RemoveListener( PlaySoundOnClick );

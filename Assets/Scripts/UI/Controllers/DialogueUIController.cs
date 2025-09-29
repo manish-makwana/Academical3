@@ -207,7 +207,6 @@ namespace Academical
 
 		private void HandleAdvanceDialogueButtonClicked()
 		{
-			AudioManager.PlayDefaultButtonSound();
 			DialogueEvents.DialogueAdvanced?.Invoke();
 			// SetAdvanceDialogueButtonEnabled( false );
 		}

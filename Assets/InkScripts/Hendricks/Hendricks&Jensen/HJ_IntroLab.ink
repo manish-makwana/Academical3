@@ -8,7 +8,7 @@ VAR researchLook = false
 # choiceLabel: Start meeting with Jensen.
 # repeatable: false
 # hidden: true
-# tags: action, hendricks_office, required
+# tags: action, faculty_offices, required
 # ===
 
 {DbInsert("Seen_HJINTRO")}
