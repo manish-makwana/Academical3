@@ -39,7 +39,7 @@ You write a brief email saying that you can not make it to today's meeting. She 
 # repeatable: false
 # ===
 
-{DbInsert("Seen_BHS3")}
+
 
 {ShowCharacter("Hendricks", "left", "")}
 
@@ -127,7 +127,7 @@ Bronislav: I see...
 ->BHS3_HowDoYouMeanISee
 
 == BHS3_HowDoYouMeanISee ==
-Hendricks: "For instance, would you have ever considered putting Jensen on your paper if not for this offer? Last time we spoke, you were frustrated with his feedback."
+Hendricks: "For instance, would you have ever considered putting Jensen on your paper if not for this offer?"
 
 {not ignoredHendricks: Hendricks: "Last time we spoke, you were frustrated with his feedback."}
 
@@ -213,17 +213,18 @@ She seems to be telling half the truth, put off by your curtness.
     **["Ivy offered to get me a job... if I add Jensen to my paper." # >> ChangeOpinion Hendricks Bronislav ++]->BHS3_IvyOfferedMeJob
     **["No, I just wanted to say hello." # >> ChangeOpinion Hendricks Bronislav --]
     Bronislav: "No, I just wanted to say hello."
-        Hendricks: "Well, it was good to see you! I should probably get back to my reading. It was just getting good."
+        Hendricks: "Well, it was good to see you! Please feel free to reach out if you are having any issues. I'm here to support you."
+        Bronislav: "Of course." 
 
    She smiles and waves as you take your leave.
     
     ->BHS3_HideHenAndEnd
     
-*["Sorry for interrupting your study session."]
+*["Sorry for interrupting you."]
     Hendricks: "It's no problem. It was good to see you! Have a good day."
     
     ->BHS3_HideHenAndEnd
 == BHS3_HideHenAndEnd ==
 {HideCharacter("Hendricks")}
-
+{DbInsert("Seen_BHS3")}
 ->DONE

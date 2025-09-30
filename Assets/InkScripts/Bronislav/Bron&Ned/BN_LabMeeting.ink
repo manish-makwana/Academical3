@@ -13,8 +13,6 @@
 
 ~IvyDeniedOfficial = DbAssert("BI_OfficiallyRejected") 
 
-{DbInsert("Seen_BNLM")}
-
 {ShowCharacter("Ned", "left", "")}
 
 
@@ -106,8 +104,8 @@ Ned: "Hello Bronislav, have a seat. How are you today?"
     Bronislav: "Is that a little too harsh of a punishment?"
     
     Ned: "Think of it this way, since Jensen tried to get on a paper without participating in any of the work why should he be in lab meetings to discuss research he didn't do."
-*["I think thats reasonable."]
-    Bronislav: "I think thats reasonable."
+*["I think that's reasonable."]
+    Bronislav: "I think that's reasonable."
 
     Ned nods his head
     
@@ -129,7 +127,7 @@ Ned: "Hello Bronislav, have a seat. How are you today?"
 == BNLM_RuinedRelationship ==
 Bronislav: "I feel as if I ruined my relationship with Ivy after everything."
 
-Ned: "I understand that. But I want you to understand we are all adults here, and boundaries are important especially when they involve your work and future. Relationships involves these boundaries and the respect of them."
+Ned: "I understand that. But I want you to understand we are all adults here, and boundaries are important especially when they involve your work and future. Relationships involve these boundaries and the respect of them."
 *["Yeah, you're right."]
     Bronislav: "Yeah, you're right..." 
     
@@ -179,5 +177,5 @@ Bronislav: "Understood." ->BNLM_SECONDPOOLOFQUESTIONS
 
 == BNLM_HideNedAndEnd ==
 {HideCharacter("Ned")}
-
+{DbInsert("Seen_BNLM")}
 ->DONE
