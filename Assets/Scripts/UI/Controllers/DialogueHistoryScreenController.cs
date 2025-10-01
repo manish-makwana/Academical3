@@ -57,8 +57,8 @@ namespace Academical
 			List<DialogueHistoryEntry> entries = GameStateManager.GetGameState().DialogueHistory;
 
 			ClearEntries();
-
-			foreach ( var entry in entries )
+			//reverse list order 
+			for ( int i = entries.Count - 1; i >= 0; i-- )
 			{
 				GameObject entryUIComponent = Instantiate(
 					m_HistoryEntryPrefab, m_HistoryEntryContainer.transform
@@ -67,8 +67,9 @@ namespace Academical
 
 				var uiComponent = entryUIComponent.GetComponent<DialogueHistoryEntryUI>();
 
-				uiComponent.SetSpeaker( entry.Speaker );
-				uiComponent.SetText( entry.Text );
+				uiComponent.SetSpeaker( entries[i].Speaker );
+				uiComponent.SetText( entries[i].Text );
+				uiComponent.SetCharacterPortrait( entries[i].Speaker );
 			}
 		}
 

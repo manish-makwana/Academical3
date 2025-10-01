@@ -1043,6 +1043,7 @@ namespace Academical
 			if ( result.success )
 			{
 				NotificationManager.Instance.QueueNotification( "Game Saved!" );
+				AudioManager.PlayNotificationSound();
 			}
 			else
 			{
