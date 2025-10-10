@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Anansi;
 using TMPro;
@@ -60,6 +61,12 @@ namespace Academical
 		private Image m_SpeakerImage;
 
 		[SerializeField]
+		private Image m_SpeakerBackground;
+
+		[SerializeField]
+		CharacterProfileLookup portraitMapping;
+
+		[SerializeField]
 		private GameObject m_SpeakerImageContainer;
 
 		#endregion
@@ -109,10 +116,42 @@ namespace Academical
 			if ( IsTyping ) m_skipTypewriterEffect = true;
 		}
 
+		public void SetSpeakerDetails(SpeakerInfo speaker)
+		{
+			//If no speaker, set everything blank, background to black
+			if ( speaker == null )
+			{
+				SetSpeakerName( "" );
+				SetSpeakerImage( null );
+				SetSpeakerBackgroundColor( Color.black );
+			}
+			else
+			{
+				String speakerName = speaker.SpeakerName;
+				//use portraitmapping to find background color
+				if ( portraitMapping.TryGetBackground( speakerName, out var backgroundColor ) )
+				{
+					m_SpeakerBackground.color = backgroundColor;
+				}
+				else
+				{
+					m_SpeakerBackground.color = Color.black;
+				}
+				//set speaker image/name
+				SetSpeakerImage( speaker.Sprite );
+				SetSpeakerName( speakerName );
+			}
+		}
+
 		public void SetSpeakerImage(Sprite sprite)
 		{
 			m_SpeakerImage.sprite = sprite;
 			m_SpeakerImageContainer.SetActive( sprite != null );
+		}
+
+		public void SetSpeakerBackgroundColor(Color color)
+		{
+			m_SpeakerBackground.color = color;
 		}
 
 		public void SetSpeakerName(string name)
@@ -182,17 +221,7 @@ namespace Academical
 
 		private void OnSpeakerChanged(SpeakerInfo info)
 		{
-			if ( info == null )
-			{
-				SetSpeakerName( "" );
-				SetSpeakerImage( null );
-
-			}
-			else
-			{
-				SetSpeakerName( info.SpeakerName );
-				SetSpeakerImage( info.Sprite );
-			}
+			SetSpeakerDetails( info );
 		}
 
 		private void HandleDialogueStarted()

@@ -58,7 +58,7 @@ namespace Academical
 			string ownerName = m_Owner.DisplayName;
 			string targetName = m_Target.DisplayName;
 			string sign = (m_Value > 0) ? "+" : "";
-			return $"{ownerName} opinion of {targetName}: {sign}{m_Value}";
+			return $"{ownerName} Relationship";
 		}
 
 		public Sprite GetIcon()
