@@ -3,7 +3,7 @@
 # ---
 # ===
 
-{SetPlayerLocation("student_cubes")}
+{SetPlayerLocation("bedroom")}
 {ShowCharacter("Bronislav", "right", "")}
 
 It's been a while since conference submissions, and the anxiety of waiting on acceptance and rejection decisions is thick in the air.

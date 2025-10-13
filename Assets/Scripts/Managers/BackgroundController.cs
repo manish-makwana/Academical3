@@ -168,9 +168,6 @@ namespace Academical
 				StopCoroutine( m_transitionCoroutine );
 			}
 
-			// TODO: Disable Dialogue Manager from auto advancing
-			DialogueEvents.OnToggleSkipBlankLines?.Invoke( false );
-
 			m_transitionCoroutine = StartCoroutine( FadeToBlack( delaySeconds ) );
 		}
 
@@ -193,9 +190,6 @@ namespace Academical
 			{
 				StopCoroutine( m_transitionCoroutine );
 			}
-
-			// TODO: Disable Dialogue Manager from auto advancing
-			DialogueEvents.OnToggleSkipBlankLines?.Invoke( false );
 
 			m_transitionCoroutine = StartCoroutine( FadeFromBlack( delaySeconds ) );
 		}

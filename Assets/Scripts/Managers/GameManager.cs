@@ -441,12 +441,22 @@ namespace Academical
 
 		private IEnumerator AdvanceDayCoroutine()
 		{
-			GameEvents.OnFadeToBlack?.Invoke( 2.0f );
+			//Change to end day music
+			//TODO: shouldn't hard code this label.
+			string endDay = MusicLookup.GetMusicLabelForLocationID( "end_day" );
+			AudioManager.CrossfadeMusicTo( endDay, fadeSeconds: 0f, loop: false, volume: 1 );
+			//Fade to black
+			GameEvents.OnFadeToBlack?.Invoke( .5f );
+			//Wait for fade back in
 
-			yield return new WaitForSeconds( 1.0f );
 
-			GameEvents.OnFadeFromBlack?.Invoke( 2.0f );
 
+			yield return new WaitForSeconds( 6.5f );
+
+
+
+			GameEvents.OnFadeFromBlack?.Invoke( .5f );
+			
 			//Fetch day event label based on our constants defintion.
 			int nextDayNum = m_simulationController.DateTime.Day + 1;
 			string dateLabel = DateLabelConstants.GetLabelForDay( nextDayNum );
@@ -457,6 +467,8 @@ namespace Academical
 
 			//Auto-start next day of content
 			TriggerDayIntroDialogue( nextDayNum );
+
+
 
 		}
 

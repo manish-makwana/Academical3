@@ -109,3 +109,16 @@ EXTERNAL SetCurrentLocation(locationId)
 {SetCurrentLocation("faculty_offices")}
 
 -> DONE
+
+=== bedroom ===
+# ---
+# choiceLabel: Go to Sleep.
+# hidden: true
+# tags: location
+# ===
+
+{SetCurrentLocation("bedroom")}
+
+-> DONE
+
+

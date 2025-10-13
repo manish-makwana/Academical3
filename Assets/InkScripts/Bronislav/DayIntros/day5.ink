@@ -3,7 +3,7 @@
 # ---
 # ===
 
-{SetPlayerLocation("student_cubes")}
+{SetPlayerLocation("bedroom")}
 {ShowCharacter("Bronislav", "right", "")}
 
 It's finally the day of the big conference! It's been a long time coming.
