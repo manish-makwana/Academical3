@@ -11,7 +11,7 @@ VAR IvyDealDenied = false
 # date.day!3
 # @end
 # repeatable: false
-# tags: action, student_cubes, required
+# tags: action, student_cubes, required, character:ivy
 # ===
 # Summary: Ivy officially gives the deal to Bronislav 
 

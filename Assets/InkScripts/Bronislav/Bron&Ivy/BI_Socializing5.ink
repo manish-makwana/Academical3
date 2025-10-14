@@ -11,7 +11,7 @@
 # date.day!5
 # @end
 # repeatable: false
-# tags: action, cafe, required
+# tags: action, cafe, required, character:ivy
 #===
 
 // TODO: selection based off of whether Jensen was ever on the paper

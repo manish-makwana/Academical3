@@ -3,6 +3,13 @@
 # ---
 # ===
 
+VAR tutorialDone = false
+VAR presentationDone = false
+~ tutorialDone = DbAssert("TutorialDone")
+~ presentationDone = DbAssert("Seen_BJ_INTRO")
+
+{tutorialDone == false:
+
 Welcome to the world of Academical!
 
 
@@ -22,6 +29,12 @@ Do you need a quick tutorial on how to play before we get started?
 
 + [I know how to play.]
     ->Day1_Continue
+}
+
+{tutorialDone == true:
+
+->Day1_Continue
+}
 
 === Tutorial ===
 
@@ -47,13 +60,37 @@ Did you get all of that?
 
 === Day1_Continue ===
 
+{DbInsert("TutorialDone")}
+
+{tutorialDone == false:
+
 Excellent! We'll start our story in the lecture hall of the Psychology department.
 
-{SetPlayerLocation("lecture_hall")}
+}
+
+
+{tutorialDone == true:
+
+Welcome back to the world of Academical!
+
+}
+
 {ShowCharacter("Bronislav", "right", "")}
 
 It's the start of a new term - and you've (<i>mostly</i>) finished work on research that you aim to submit to a conference at the end of the term.
+The rest of the department is buzzing with excitement for the conference as well - everyone has high-stakes work that they are excited to submit for publication.
 
-Your department has agreed to watch a presentation of your work so that you can get feedback before your final submission.
+{presentationDone == false:
+{SetPlayerLocation("lecture_hall")}
+Feedback always helps - luckily, your department has agreed to watch a presentation of your work so that you can get advice on your work.
+{DisableLocationButton()}
+}
+
+{tutorialDone == true && presentationDone == true:
+Time to get out there and see what's going on!
+}
+
+
+
 
 -> DONE

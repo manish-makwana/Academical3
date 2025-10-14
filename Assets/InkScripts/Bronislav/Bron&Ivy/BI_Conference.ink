@@ -19,7 +19,7 @@ VAR BI_C_negativeNelly = false
 # date.day!5
 # @end
 # repeatable: false
-# tags: action, lecture_hall, required
+# tags: action, lecture_hall, required, character:ivy
 # ===
 #Summary: You confront Ivy at the conference and exchange apologies 
 

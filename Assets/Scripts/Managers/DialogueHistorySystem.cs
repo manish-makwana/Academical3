@@ -37,12 +37,18 @@ namespace Academical
 		{
 			SpeakerInfo currentSpeaker = m_DialogueManager.CurrentSpeaker;
 
-			if ( currentSpeaker == null || text == "" ) return;
+			if (text == "" ) return;
+
+			string speaker = "Narrator";
+			if ( currentSpeaker != null )
+			{
+				speaker = currentSpeaker.SpeakerName;
+			}
 
 			GameStateManager.GetGameState().DialogueHistory.Add(
 				new DialogueHistoryEntry()
 				{
-					Speaker = currentSpeaker.SpeakerName,
+					Speaker = speaker,
 					Text = text
 				}
 			);

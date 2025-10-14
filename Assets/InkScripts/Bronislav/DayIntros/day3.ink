@@ -3,7 +3,7 @@
 # ---
 # ===
 
-{SetPlayerLocation("student_cubes")}
+{SetPlayerLocation("bedroom")}
 {ShowCharacter("Bronislav", "right", "")}
 
 It's a stressful time - we're now about halfway through the term, papers are done, and it's time to submit to the big conference.

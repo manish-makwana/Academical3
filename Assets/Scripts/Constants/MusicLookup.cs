@@ -13,12 +13,15 @@ namespace Academical
         public static readonly Dictionary<string, string> MusicLabels = new Dictionary<string, string>
         {
             {"cafe", "Samba Isobel"},
-            {"hendricks_office", "Airport Lounge"},
+            {"faculty_offices", "Airport Lounge"},
             {"lecture_hall", "Deuces"},
             {"library", "Cool Vibes"},
             {"neds_office", "George Street Shuffle"},
             {"outside", "Fuzzball Parade"},
-            {"student_cubes", "Hep Cats"}
+            {"student_cubes", "Hep Cats"},
+            {"bedroom", "Wake Up"},
+            {"end_day", "Good Night Short"},
+            {"game_over", "Good Night"}
         };
 
         public static string GetMusicLabelForLocationID(string locationID)

@@ -7,7 +7,7 @@ VAR withdrewPaper = false
 # date.day!6
 # @end
 # repeatable: false
-# tags: action, student_cubes, auxiliary
+# tags: action, student_cubes, auxiliary, character:brad
 #===
 #Summary: Brad either goes to ethics training or shares excitement about next conference
 

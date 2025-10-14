@@ -40,6 +40,15 @@ namespace Academical
 			var stat = m_Context.socialEngine.State
 				.GetRelationship( m_Owner.UniqueID, m_Target.UniqueID )
 				.Stats.GetStat( "Opinion" );
+			//Play Audio for success/failure
+			if ( m_Value >= 0 )
+			{
+				AudioManager.PlayDelayedSuccessSound();
+			}
+			else
+			{
+				AudioManager.PlayDelayedFailureSound();
+			}
 
 			stat.BaseValue += m_Value;
 		}
@@ -49,7 +58,7 @@ namespace Academical
 			string ownerName = m_Owner.DisplayName;
 			string targetName = m_Target.DisplayName;
 			string sign = (m_Value > 0) ? "+" : "";
-			return $"{ownerName} opinion of {targetName}: {sign}{m_Value}";
+			return $"{ownerName} Relationship";
 		}
 
 		public Sprite GetIcon()

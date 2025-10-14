@@ -78,7 +78,7 @@ EXTERNAL SetCurrentLocation(locationId)
 
 === neds_office ===
 # ---
-# choiceLabel: Go to the Ned's office.
+# choiceLabel: Go to Ned's office.
 # hidden: true
 # tags: location
 # ===
@@ -90,7 +90,7 @@ EXTERNAL SetCurrentLocation(locationId)
 
 === hendricks_office ===
 # ---
-# choiceLabel: Go to the Hendricks' office.
+# choiceLabel: Go to Hendricks' office.
 # hidden: true
 # tags: location
 # ===
@@ -98,3 +98,27 @@ EXTERNAL SetCurrentLocation(locationId)
 {SetCurrentLocation("hendricks_office")}
 
 -> DONE
+
+=== faculty_offices ===
+# ---
+# choiceLabel: Go to the Faculty Offices.
+# hidden: true
+# tags: location
+# ===
+
+{SetCurrentLocation("faculty_offices")}
+
+-> DONE
+
+=== bedroom ===
+# ---
+# choiceLabel: Go to Sleep.
+# hidden: true
+# tags: location
+# ===
+
+{SetCurrentLocation("bedroom")}
+
+-> DONE
+
+

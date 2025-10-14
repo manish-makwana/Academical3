@@ -56,7 +56,6 @@ namespace Academical
 
         private void OnCloseButtonClicked()
         {
-            AudioManager.PlayDefaultButtonSound();
             ClearChoices();
             Hide();
         }
@@ -64,6 +63,18 @@ namespace Academical
         private void OnAvailableActionsUpdated(List<ActionStoryletInfo> storylets)
         {
             ClearChoices();
+
+            if ( storylets.Count <= 0 )
+            {
+                GameManager.Instance.DisableActionButton();
+            }
+            else
+            {
+                GameManager.Instance.EnableActionButton();
+            }
+
+
+
             foreach ( var entry in storylets )
             {
                 GameObject obj = Instantiate(
@@ -92,7 +103,11 @@ namespace Academical
                     choiceButton.HideRequiredIndicator();
                 }
 
+
+
                 choiceButton.SetStorylet( entry.storyletInstance );
+
+                choiceButton.SetPortraitAndBackground();
             }
         }
 

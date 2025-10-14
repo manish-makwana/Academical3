@@ -16,8 +16,8 @@ namespace Academical
 		public GameSettings()
 		{
 			MasterVolume = 100;
-			SfxVolume = 30;
-			MusicVolume = 100;
+			SfxVolume = 25;
+			MusicVolume = 50;
 			TextSpeed = TextSpeed.NO_DELAY;
 		}
 

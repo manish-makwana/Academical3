@@ -21,7 +21,10 @@ namespace Academical
 		[Tooltip("Button Click")]
 		[SerializeField] private AudioClip m_DefaultButtonSound;
 
-		[Header("Game Sounds")]
+		[Tooltip( "Dialogue Button Click" )]
+		[SerializeField] private AudioClip m_DialogueButtonSound;
+
+		[Header( "Game Sounds" )]
 		[Tooltip("Sound played when the player accomplishes something.")]
 		[SerializeField] private AudioClip m_SuccessSound;
 
@@ -192,23 +195,43 @@ namespace Academical
 
 			PlayOneSFX(audioManager.m_DefaultButtonSound, Vector3.zero);
 		}
-
-		public static void PlaySuccessSound()
+		
+		public static void PlayDialogueButtonSound()
 		{
 			AudioManager audioManager = FindObjectOfType<AudioManager>();
 			if (audioManager == null)
 				return;
 
-			PlayOneSFX(audioManager.m_SuccessSound, Vector3.zero);
+			PlayOneSFX(audioManager.m_DialogueButtonSound, Vector3.zero);
+		}
+
+		public static void PlaySuccessSound()
+		{
+			AudioManager audioManager = FindObjectOfType<AudioManager>();
+			if ( audioManager == null )
+				return;
+
+			PlayOneSFX( audioManager.m_SuccessSound, Vector3.zero );
+		}
+		
+		//These coroutines are so we can play sounds that don't overlap with button presses.
+		public static void PlayDelayedSuccessSound()
+		{
+			AudioManager.Instance.StartCoroutine( AudioManager.Instance.PlaySuccessAfterDelay( .05f ) );
+		}
+
+		public static void PlayDelayedFailureSound()
+		{
+			AudioManager.Instance.StartCoroutine( AudioManager.Instance.PlayFailureAfterDelay( .05f ) );
 		}
 
 		public static void PlayNotificationSound()
 		{
 			AudioManager audioManager = FindObjectOfType<AudioManager>();
-			if (audioManager == null)
+			if ( audioManager == null )
 				return;
 
-			PlayOneSFX(audioManager.m_NotificationSound, Vector3.zero);
+			PlayOneSFX( audioManager.m_NotificationSound, Vector3.zero );
 		}
 
 		public static void PlayFailureSound()
@@ -216,16 +239,28 @@ namespace Academical
 			AudioManager audioManager = FindObjectOfType<AudioManager>();
 			if (audioManager == null)
 				return;
-
 			PlayOneSFX(audioManager.m_FailureSound, Vector3.zero);
 		}
 
+		IEnumerator PlaySuccessAfterDelay(float delay)
+		{
+			yield return new WaitForSeconds( delay );
+			PlaySuccessSound();
+		}
+
+		IEnumerator PlayFailureAfterDelay(float delay)
+		{
+			yield return new WaitForSeconds( delay );
+			PlayFailureSound();
+		}
+
+
 		public static void PlayOneSFX(AudioClip clip, Vector3 sfxPosition)
 		{
-			if (clip == null)
+			if ( clip == null )
 				return;
 
-			GameObject sfxInstance = new GameObject(clip.name);
+			GameObject sfxInstance = new GameObject( clip.name );
 			sfxInstance.transform.position = sfxPosition;
 
 			AudioSource source = sfxInstance.AddComponent<AudioSource>();
@@ -233,9 +268,9 @@ namespace Academical
 
 #if UNITY_WEBGL
 			// Apply Master * SFX on WebGL explicitly so SFX always obey settings.
-			float master = GetVolume(k_MasterGroup + k_Parameter);
-			float sfx    = GetVolume(k_SfxGroup    + k_Parameter);
-			source.volume = Mathf.Clamp01(master * sfx);
+			float master = GetVolume( k_MasterGroup + k_Parameter );
+			float sfx = GetVolume( k_SfxGroup + k_Parameter );
+			source.volume = Mathf.Clamp01( master * sfx );
 #else
 			// set the mixer group (e.g. music, sfx, etc.)
 			source.outputAudioMixerGroup = GetAudioMixerGroup(k_SfxGroup);
@@ -244,7 +279,7 @@ namespace Academical
 			source.Play();
 
 			// destroy after clip length
-			Destroy(sfxInstance, clip.length);
+			Destroy( sfxInstance, clip.length );
 		}
 
 		// =========================
@@ -396,7 +431,11 @@ namespace Academical
 		private void Music_CrossfadeToByName(string clipName, float fadeSeconds, bool loop, float volume)
 		{
 			AudioClip clip = ResolveMusicByName(clipName);
-			if (clip == null) return;
+			if ( clip == null )
+			{
+				Debug.Log( "No clip found for: " + clipName );
+				return;
+			}
 			Music_CrossfadeTo(clip, fadeSeconds, loop, volume);
 		}
 

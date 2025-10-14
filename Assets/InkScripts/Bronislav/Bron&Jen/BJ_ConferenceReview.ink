@@ -8,7 +8,7 @@ VAR thinking = false
 # Seen_BI_ReviewPeriod
 # @end
 # repeatable: false
-# tags: action, student_cubes, auxiliary 
+# tags: action, student_cubes, auxiliary, character:jensen 
 #===
 # Summary: Jensen checks in to see if he is on the paper 
 

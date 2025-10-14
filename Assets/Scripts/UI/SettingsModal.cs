@@ -19,6 +19,8 @@ namespace Academical
 		[SerializeField] private Slider m_SFXVolumeSlider;
 		[SerializeField] private TMP_Text m_SFXVolumeValueLabel;
 
+		[SerializeField] private PauseSystem m_PauseSystem;
+
 		private GameSettings m_GameSettings;
 
 		#endregion
@@ -31,6 +33,8 @@ namespace Academical
 			m_GameSettings = new GameSettings();
 		}
 
+
+
 		#endregion
 
 		#region Public Methods
@@ -39,6 +43,12 @@ namespace Academical
 		{
 			base.Show();
 			UpdateSettingControls( SettingsManager.Settings );
+		}
+
+		public override void Hide()
+		{
+			base.Hide();
+			m_PauseSystem.TogglePauseMenu();	
 		}
 
 		#endregion

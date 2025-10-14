@@ -55,6 +55,7 @@ namespace Academical
             m_CloseButton.onClick.RemoveListener( Hide );
         }
 
+    // Stop using event system for tracking - use characters as template
         public override void Show()
         {
             m_OpenButtonImage.color = m_ActiveColor;
@@ -65,22 +66,29 @@ namespace Academical
                 int buttonDayIdentifier = button.GetComponent<ButtonIdentifier>().Identifier;
                 if ( buttonDayIdentifier == m_SimulationController.DateTime.Day )
                 {
+                    
                     EventSystem.current.SetSelectedGameObject( button.gameObject );
                     defaultSelected = true;
                     ShowDayContent( button.GetComponent<PanelTextContent>() );
+                    button.interactable = true;
                 }
 
                 //Strikethrough text if we are after the day
                 if ( buttonDayIdentifier < m_SimulationController.DateTime.Day )
                 {
-                    TMP_Text buttonTMPText = button.GetComponentInChildren<TMP_Text>(); 
+                    TMP_Text buttonTMPText = button.GetComponentInChildren<TMP_Text>();
                     string buttonText = buttonTMPText.text;
                     buttonTMPText.text = "<s>" + buttonText + "</s>";
+                    button.interactable = true;
                 }
+
+                if ( buttonDayIdentifier > m_SimulationController.DateTime.Day )
+                {
+                    button.interactable = false;
+                 }
             }
             if ( !defaultSelected )
             {
-                EventSystem.current.SetSelectedGameObject( m_DefaultDayShownButton.gameObject );
                 ShowDayContent( m_DefaultDayShownButton.GetComponent<PanelTextContent>() );
             }
         }

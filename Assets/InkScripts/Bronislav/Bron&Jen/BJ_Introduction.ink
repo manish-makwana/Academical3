@@ -19,12 +19,13 @@ As Bronislav, you must chose how to approach this situation.
 # date.day!1
 # @end
 # repeatable: false
-# tags: action, lecture_hall, required
+# tags: action, lecture_hall, required, character:cast
 # ===
 # Summary: Jensen gives not so great feedback on your presentation
 
 {UnlockAllLocations()}
 
+{EnableLocationButton()}
 
 You nervously approach the podium. The room has filled up with what seems like the entire department - Professors, undergrads, grads, admins.
 
@@ -94,7 +95,7 @@ Jensen: "I also thought that you could have presented your evidence better, and 
     ->BJIntro_FirstTime
 
 === BJIntro_WriteDown ===
-{ShowCharacter("Jensen", "left", "hopeful")}
+{ShowCharacter("Jensen", "left", "happy")}
 Bronislav: "Yes, of course. Thanks for letting me know."
 
 You write down his feedback in your notebook.
@@ -145,7 +146,7 @@ You put the pen and notebook back away. Jensen turns away ashamed by you mocking
 ->DONE
 
 === BJIntro_FirstTime ===
-{ShowCharacter("Jensen", "left", "ashamed")}
+{ShowCharacter("Jensen", "left", "uncomfy")}
 Bronislav: "This has to be your first time at a meeting like this isn't it?"
 
 You put the pen and notebook back away. 

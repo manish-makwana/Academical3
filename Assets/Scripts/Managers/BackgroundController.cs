@@ -168,23 +168,15 @@ namespace Academical
 				StopCoroutine( m_transitionCoroutine );
 			}
 
-			// TODO: Disable Dialogue Manager from auto advancing
-			DialogueEvents.OnToggleSkipBlankLines?.Invoke( false );
-
 			m_transitionCoroutine = StartCoroutine( FadeToBlack( delaySeconds ) );
 		}
 
 		private IEnumerator FadeToBlack(float delaySeconds)
 		{
-			Debug.Log( "Waiting To Fade" );
 			yield return new WaitForSeconds( delaySeconds );
 
 			yield return FadeTo( Color.black, m_fadeOutSeconds );
-			Debug.Log( "Screen is Black" );
 
-			// TODO: Enable Dialogue Manager auto advancing
-			// DialogueEvents.OnToggleSkipBlankLines?.Invoke( true );
-			// DialogueEvents.DialogueAdvanced?.Invoke();
 		}
 
 		private void HandleFadeFromBlack(float delaySeconds)
@@ -194,25 +186,15 @@ namespace Academical
 				StopCoroutine( m_transitionCoroutine );
 			}
 
-			// TODO: Disable Dialogue Manager from auto advancing
-			DialogueEvents.OnToggleSkipBlankLines?.Invoke( false );
-
 			m_transitionCoroutine = StartCoroutine( FadeFromBlack( delaySeconds ) );
 		}
 
 		private IEnumerator FadeFromBlack(float delaySeconds)
 		{
-			Debug.Log( "Waiting to fade back." );
-
 			yield return new WaitForSeconds( delaySeconds );
 
 			yield return FadeTo( new Color( 0, 0, 0, 0 ), m_fadeOutSeconds );
-
-			Debug.Log( "Faded back to normal" );
-
-			// TODO: Enable Dialogue Manager auto advancing
 			DialogueEvents.OnToggleSkipBlankLines?.Invoke( true );
-			// DialogueEvents.DialogueAdvanced?.Invoke();
 		}
 
 		private void HandleBackgroundChange(BackgroundInfo info)

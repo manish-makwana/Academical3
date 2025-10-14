@@ -5,7 +5,7 @@
 # date.day!2
 # @end
 # repeatable: false
-# tags: action, student_cubes, required
+# tags: action, student_cubes, required, character:ivy
 #===
 # Summary: Ivy introduces the idea of her and her uncle's research firm, Bronislav's visa issues is mentioned, Ivy asks if Jensen can be on the paper
 
