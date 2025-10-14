@@ -8,7 +8,7 @@
 # Seen_BJ_INTRO
 # @end
 # repeatable: false
-# tags: action, cafe, required 
+# tags: action, cafe, required, character:ivy 
 #===
 VAR BI_FirstCoffee_InternationalMentioned = false
 VAR talkedWithBradAboutJensen = false

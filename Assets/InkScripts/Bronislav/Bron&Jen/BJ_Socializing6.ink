@@ -7,7 +7,7 @@
 # date.day!6
 # @end
 # hidden: true
-# tags: action, library, auxiliary
+# tags: action, library, auxiliary, character:jensen
 # ===
 
 # Summary: You give a quick chat to Jensen about what he's currently doing. 

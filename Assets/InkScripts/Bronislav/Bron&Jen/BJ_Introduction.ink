@@ -19,12 +19,13 @@ As Bronislav, you must chose how to approach this situation.
 # date.day!1
 # @end
 # repeatable: false
-# tags: action, lecture_hall, required
+# tags: action, lecture_hall, required, character:cast
 # ===
 # Summary: Jensen gives not so great feedback on your presentation
 
 {UnlockAllLocations()}
 {DbInsert("Seen_BJ_INTRO")}
+{EnableLocationButton()}
 
 You nervously approach the podium. The room has filled up with what seems like the entire department - Professors, undergrads, grads, admins.
 

@@ -7,7 +7,7 @@
 # Seen_BHS1
 # date.day!2
 # @end
-# tags: action, library, auxiliary
+# tags: action, library, auxiliary, character:hendricks
 # repeatable: false
 # ===
 

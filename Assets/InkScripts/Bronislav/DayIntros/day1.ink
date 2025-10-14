@@ -47,6 +47,7 @@ Did you get all of that?
 
 === Day1_Continue ===
 
+
 Excellent! We'll start our story in the lecture hall of the Psychology department.
 
 {SetPlayerLocation("lecture_hall")}
@@ -55,5 +56,7 @@ Excellent! We'll start our story in the lecture hall of the Psychology departmen
 It's the start of a new term - and you've (<i>mostly</i>) finished work on research that you aim to submit to a conference at the end of the term.
 
 Your department has agreed to watch a presentation of your work so that you can get feedback before your final submission.
+
+{DisableLocationButton()}
 
 -> DONE

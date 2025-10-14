@@ -74,6 +74,12 @@ INCLUDE ./DayIntros/day4.ink
 INCLUDE ./DayIntros/day5.ink
 INCLUDE ./DayIntros/day6.ink
 
+INCLUDE ./EmptyLocationDialogue/cafe.ink
+INCLUDE ./EmptyLocationDialogue/student_cubes.ink
+INCLUDE ./EmptyLocationDialogue/library.ink
+INCLUDE ./EmptyLocationDialogue/faculty_offices.ink
+INCLUDE ./EmptyLocationDialogue/lecture_hall.ink
+
 EXTERNAL DbInsert(statement)
 EXTERNAL DbAssert(statement)
 EXTERNAL ShowCharacter(characterName, location, spriteTags)
@@ -88,6 +94,8 @@ EXTERNAL AdvanceDay()
 EXTERNAL LockAllLocations(message)
 EXTERNAL UnlockAllLocations()
 EXTERNAL SetPlayerLocation(locationID)
+EXTERNAL EnableLocationButton()
+EXTERNAL DisableLocationButton()
 
 
 // There can be only one "start" storylet. We place it in this

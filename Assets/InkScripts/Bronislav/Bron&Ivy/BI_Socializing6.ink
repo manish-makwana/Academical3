@@ -9,7 +9,7 @@ VAR apology = true
 # date.day!6
 # @end
 # repeatable: false
-# tags: action, student_cubes, auxiliary
+# tags: action, student_cubes, auxiliary, character:ivy
 # ===
 
 {ShowCharacter("Ivy", "left", "")}

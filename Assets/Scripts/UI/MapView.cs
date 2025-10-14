@@ -44,14 +44,12 @@ namespace Academical
 
 		private void HandleLocationSelected(Location location)
 		{
-			AudioManager.PlayDefaultButtonSound();
 			Hide();
 			m_GameManager.ChangeLocation( location );
 		}
 
 		private void HandleAdvanceDayClicked()
 		{
-			AudioManager.PlayDefaultButtonSound();
 			Hide();
 			m_GameManager.AdvanceDay();
 		}

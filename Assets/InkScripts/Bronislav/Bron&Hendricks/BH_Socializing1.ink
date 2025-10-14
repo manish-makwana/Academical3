@@ -26,7 +26,7 @@ She wants to talk about your research progress.
 # BHS1_unlocked
 # date.day!1
 # @end
-# tags: action, faculty_offices, required 
+# tags: action, faculty_offices, required, character:hendricks
 # repeatable: false
 # ===
 

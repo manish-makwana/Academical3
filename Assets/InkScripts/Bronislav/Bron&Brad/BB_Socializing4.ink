@@ -8,7 +8,7 @@ VAR confided = false
 # date.day!4
 # @end
 # repeatable: false
-# tags: action, library, required
+# tags: action, library, required, character:brad
 # ===
 #Summary: Brad is contemplating withdrawing paper
 

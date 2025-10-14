@@ -173,15 +173,10 @@ namespace Academical
 
 		private IEnumerator FadeToBlack(float delaySeconds)
 		{
-			Debug.Log( "Waiting To Fade" );
 			yield return new WaitForSeconds( delaySeconds );
 
 			yield return FadeTo( Color.black, m_fadeOutSeconds );
-			Debug.Log( "Screen is Black" );
 
-			// TODO: Enable Dialogue Manager auto advancing
-			// DialogueEvents.OnToggleSkipBlankLines?.Invoke( true );
-			// DialogueEvents.DialogueAdvanced?.Invoke();
 		}
 
 		private void HandleFadeFromBlack(float delaySeconds)
@@ -196,17 +191,10 @@ namespace Academical
 
 		private IEnumerator FadeFromBlack(float delaySeconds)
 		{
-			Debug.Log( "Waiting to fade back." );
-
 			yield return new WaitForSeconds( delaySeconds );
 
 			yield return FadeTo( new Color( 0, 0, 0, 0 ), m_fadeOutSeconds );
-
-			Debug.Log( "Faded back to normal" );
-
-			// TODO: Enable Dialogue Manager auto advancing
 			DialogueEvents.OnToggleSkipBlankLines?.Invoke( true );
-			// DialogueEvents.DialogueAdvanced?.Invoke();
 		}
 
 		private void HandleBackgroundChange(BackgroundInfo info)

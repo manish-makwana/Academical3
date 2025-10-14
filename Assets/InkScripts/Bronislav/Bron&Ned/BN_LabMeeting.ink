@@ -6,7 +6,7 @@
 # @end
 # hidden: true
 # repeatable: false
-# tags: action, faculty_offices, required
+# tags: action, faculty_offices, required, character:ned
 # ===
 
 ~IvyAcceptedOfficial = DbAssert("BI_OfficiallyAccepted")

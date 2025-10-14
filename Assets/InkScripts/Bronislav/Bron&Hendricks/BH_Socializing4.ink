@@ -33,7 +33,7 @@ VAR ignoredHendricksDay3 = false
 # BI_OfficiallyAccepted
 # date.day!4
 # @end
-# tags: action, faculty_offices, auxiliary
+# tags: action, faculty_offices, auxiliary, character:hendricks
 # ---
 
 ~ignoredHendricksDay1 = DbAssert("BHS1_ignored")

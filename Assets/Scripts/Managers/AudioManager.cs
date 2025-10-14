@@ -304,7 +304,6 @@ namespace Academical
 		public static void CrossfadeMusicTo(string clipName, float fadeSeconds = -1f, bool loop = true, float volume = -1f)
 		{
 			if (Instance == null) return;
-			Debug.Log( "Reached: by clip name: " +clipName );
 			Instance.Music_CrossfadeToByName(clipName, fadeSeconds, loop, volume);
 		}
 
@@ -312,7 +311,6 @@ namespace Academical
 		public static void CrossfadeMusicTo(AudioClip clip, float fadeSeconds = -1f, bool loop = true, float volume = -1f)
 		{
 			if (Instance == null) return;
-			Debug.Log( "Reached: by clip" );
 			Instance.Music_CrossfadeTo(clip, fadeSeconds, loop, volume);
 		}
 

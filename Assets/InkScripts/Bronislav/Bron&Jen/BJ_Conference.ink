@@ -8,7 +8,7 @@
 # date.day!5
 # @end
 # repeatable: false
-# tags: action, student_cubes, required
+# tags: action, student_cubes, required, character:jensen
 # ===
 # Summary: You find Jensen at the conference and learn his feelings considering the outcome of the situation. 
 

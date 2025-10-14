@@ -13,6 +13,8 @@ using TDRS;
 using TDRS.Serialization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Academical
 {
@@ -95,6 +97,12 @@ namespace Academical
 
 		public SimDateTime CurrentDate => m_simulationController.DateTime;
 
+		[SerializeField]
+		public Button m_LocationButton;
+
+		[SerializeField]
+		public Button m_ActionButton;
+
 		#endregion
 
 		private void Awake()
@@ -157,8 +165,6 @@ namespace Academical
 				.GetStoryletsWithTags( "location" )
 				.ToDictionary( s => s.ID );
 
-			CollectEnterExitStorylets();
-
 			m_Player.Location = null;
 
 			if ( saveData != null )
@@ -205,52 +211,6 @@ namespace Academical
 		private void LoadSocialEngineState(SaveData data)
 		{
 			// m_socialEngine.State
-		}
-
-		private void CollectEnterExitStorylets()
-		{
-			Regex onLocationEnterRg = new Regex( "OnLocationEnter:(?<locationID>[_a-zA-Z][_a-zA-z0-9]*)" );
-			Regex onLocationExitRg = new Regex( "OnLocationExit:(?<locationID>[_a-zA-Z][_a-zA-z0-9]*)" );
-
-			foreach ( Storylet storylet in m_dialogueManager.Story.Storylets )
-			{
-				foreach ( string tag in storylet.Tags )
-				{
-					// Check for OnLocationEnter:<ID> tag
-					Match match = onLocationEnterRg.Match( tag );
-					if ( match.Success )
-					{
-						AddLocationEnterStorylet( match.Groups["locationId"].Value, storylet );
-					}
-
-					// Check for OnLocationExit:<ID> tag
-					match = onLocationExitRg.Match( tag );
-					if ( match.Success )
-					{
-						AddLocationExitStorylet( match.Groups["locationId"].Value, storylet );
-					}
-				}
-			}
-		}
-
-		private void AddLocationEnterStorylet(string locationId, Storylet storylet)
-		{
-			if ( !m_LocationEnterStorylets.ContainsKey( locationId ) )
-			{
-				m_LocationEnterStorylets[locationId] = new List<Storylet>();
-			}
-
-			m_LocationEnterStorylets[locationId].Add( storylet );
-		}
-
-		private void AddLocationExitStorylet(string locationId, Storylet storylet)
-		{
-			if ( !m_LocationExitStorylets.ContainsKey( locationId ) )
-			{
-				m_LocationExitStorylets[locationId] = new List<Storylet>();
-			}
-
-			m_LocationExitStorylets[locationId].Add( storylet );
 		}
 
 		/// <summary>
@@ -330,24 +290,12 @@ namespace Academical
 		public void ChangeLocation(Location location)
 		{
 			if ( m_Player.Location == location ) return;
+			GameEvents.OnFadeToBlack?.Invoke( 2f );
+						//Wait for fade back in
+			GameEvents.OnFadeFromBlack?.Invoke( 2f );
 
-			// Attempt to run an "OnLocationExit" storylet. If it does, exit execution of this
-			// function since we do not know what the storylet is going to do to the story. It's
-			// best to have the player try to change locations again once the scene is over.
-			if ( m_LocationExitStorylets.ContainsKey( location.UniqueID ) )
-			{
-				List<Storylet> storylets = m_LocationExitStorylets[location.UniqueID]
-					.Where( storylet => storylet.IsEligible )
-					.ToList();
 
-				StoryletInstance instance = SelectStoryletFromCollection( storylets );
 
-				if ( instance != null )
-				{
-					m_dialogueManager.Story.GoToStoryletInstance( instance );
-					return;
-				}
-			}
 
 
 			if ( m_Player.Location != null )
@@ -368,39 +316,33 @@ namespace Academical
 					)
 				);
 
-			GameEvents.OnLocationEnter?.Invoke( location );
-
 			//handle background audio - we have to use a lookup as Anansi doesn't allow assigning metadata (e.g. background music) to locations.
 			string backgroundMusicLabel = MusicLookup.GetMusicLabelForLocationID( location.UniqueID );
-			if ( backgroundMusicLabel != null)
+			if ( backgroundMusicLabel != null )
 			{
 				AudioManager.CrossfadeMusicTo( backgroundMusicLabel, fadeSeconds: 2f, loop: true, volume: 1 );
 			}
 
-			// Running an "OnLocationEnter" storylet ends execution too for the same reasons
-			// provided above for "OnLocationExit" storylets.
-			if ( m_LocationEnterStorylets.ContainsKey( location.UniqueID ) )
+
+			//Disable button, show blank dialogue if no action storylets exist
+			List<ActionStoryletInfo> locationStorylets = GetEligibleActionStorylets( m_CurrentLocation );
+
+			//TODO: Don't hardcode this.
+			bool validLocation = m_CurrentLocation.UniqueID != "" && m_CurrentLocation.UniqueID != "bedroom";
+
+			if ( locationStorylets.Count <= 0 && validLocation )
 			{
-				List<Storylet> storylets = m_LocationEnterStorylets[location.UniqueID]
-					.Where( storylet => storylet.IsEligible )
-					.ToList();
-
-				StoryletInstance instance = SelectStoryletFromCollection( storylets );
-
-				if ( instance != null )
-				{
-					m_dialogueManager.Story.GoToStoryletInstance( instance );
-					return;
-				}
+				DisableActionButton();
+				Storylet EmptyLocationStorylet = m_dialogueManager.Story.GetStorylet( m_CurrentLocation.UniqueID );
+				m_dialogueManager.RunStorylet( EmptyLocationStorylet );
 			}
-
-			// If we don't trigger an "OnLocationEnter" storylet, try to trigger the storylet
-			// with the same name as this location. This used to be required with the old system,
-			// but is now optional.
-			if ( m_locationStorylets.ContainsKey( location.UniqueID ) )
+			else
 			{
-				m_dialogueManager.Story.GoToStorylet( m_locationStorylets[location.UniqueID] );
+				EnableActionButton();
 			}
+			
+			
+
 		}
 
 		public StoryletInstance SelectStoryletFromCollection(IEnumerable<Storylet> storylets)
@@ -916,11 +858,67 @@ namespace Academical
 					}
 				}
 			);
+
+			story.BindExternalFunction(
+				"EnableLocationButton",
+				() =>
+				{
+					EnableLocationButton();
+				}
+			);
+
+			story.BindExternalFunction(
+				"DisableLocationButton",
+				() =>
+				{
+					DisableLocationButton();
+				}
+			);
+		}
+
+		public void DisableLocationButton()
+		{
+			m_LocationButton.interactable = false;
+		}
+
+		public void EnableLocationButton()
+		{
+			m_LocationButton.interactable = true;
+		}
+
+		public void DisableActionButton()
+		{
+			m_ActionButton.interactable = false;
+		}
+
+		public void EnableActionButton()
+		{
+			m_ActionButton.interactable = true;
 		}
 
 		private void OnActionSelectModalShown()
 		{
-			GameEvents.AvailableActionsUpdated?.Invoke( GetEligibleActionStorylets( m_CurrentLocation ) );
+			//Disable button, show blank dialogue if no action storylets exist
+			List<ActionStoryletInfo> storylets = GetEligibleActionStorylets( m_CurrentLocation );
+			if ( storylets.Count > 0 )
+			{
+				EnableActionButton();
+			}
+			GameEvents.AvailableActionsUpdated?.Invoke( storylets );
+
+		}
+
+		//TODO: Clunky - ideally we'd have an event trigger to signify the end of a storylet and/or
+		//have this update only when the change action/location menu is shown. Current 
+		//architecture is to only update on opening/closing window, which causes problematic UI
+		//patterns.
+		private void UpdateActionButton()
+		{
+			List<ActionStoryletInfo> storylets = GetEligibleActionStorylets( m_CurrentLocation );
+			if ( storylets.Count <= 0 )
+			{
+				DisableActionButton();
+			}
 		}
 
 		private void OnLocationSelectModalShown()
@@ -932,6 +930,7 @@ namespace Academical
 		private void OnActionSelected(StoryletInstance action)
 		{
 			m_dialogueManager.RunStoryletInstance( action );
+			UpdateActionButton();
 		}
 
 		public void EnableAutoSave()
@@ -1048,6 +1047,10 @@ namespace Academical
 			saveData.dilemmas = DilemmaSystem.Instance.SerializeDilemmas().ToArray();
 
 			DataPersistenceManager.SaveGame( saveData );
+
+			//We're hacking badly here - set save game state button to default.
+			EventSystem.current.SetSelectedGameObject(null);
+
 		}
 
 		private void OnGameSaved(GameSavedEventResult result)

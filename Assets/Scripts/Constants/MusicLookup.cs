@@ -26,8 +26,6 @@ namespace Academical
 
         public static string GetMusicLabelForLocationID(string locationID)
         {
-            Debug.Log( "label: " + locationID );
-            Debug.Log( MusicLabels );
             string label = null;
             if ( MusicLabels.ContainsKey( locationID ) )
             {

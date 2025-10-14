@@ -6,7 +6,7 @@
 # date.day!3
 # @end
 # repeatable: false
-# tags: action, cafe, auxiliary
+# tags: action, cafe, auxiliary, character:jensen
 # ===
 # Summary: Jensen asks if he's on the paper/updates 
 

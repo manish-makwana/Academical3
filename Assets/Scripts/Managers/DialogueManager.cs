@@ -530,9 +530,6 @@ namespace Academical
 				"ShowCharacter",
 				(string characterName, string position, string spriteTags) =>
 				{
-					Debug.Log(
-						$"Displaying character {characterName}[tags: {spriteTags}] at {position}."
-					);
 					DialogueEvents.CharacterShown?.Invoke( characterName, position, spriteTags );
 				}
 			);
@@ -541,7 +538,6 @@ namespace Academical
 				"HideCharacter",
 				(string characterName) =>
 				{
-					Debug.Log( $"Hiding character {characterName}" );
 					DialogueEvents.CharacterHidden?.Invoke( characterName );
 				}
 			);

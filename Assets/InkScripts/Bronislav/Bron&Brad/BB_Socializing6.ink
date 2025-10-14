@@ -7,7 +7,7 @@ VAR withdrewPaperr = false
 # date.day!6
 # @end
 # repeatable: false
-# tags: action, cafe, auxiliary
+# tags: action, cafe, auxiliary, character:brad
 # ===
 # Summary: Ned and Brad overlook the outcome of the options
 

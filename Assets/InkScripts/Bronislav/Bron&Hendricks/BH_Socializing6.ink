@@ -6,7 +6,7 @@
 # date.day!6
 # @end
 # repeatable: false
-# tags: action, faculty_offices, auxiliary
+# tags: action, faculty_offices, auxiliary, character:hendricks
 # ===
 
 //TODO: Create a variable to see if Bronislav took the quid pro quo deal

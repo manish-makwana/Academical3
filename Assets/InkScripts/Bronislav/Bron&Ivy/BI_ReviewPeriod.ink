@@ -22,7 +22,7 @@ VAR SwitchingOpinionsAccept = false
 # @end
 # hidden: true
 # repeatable: false
-# tags: action, required, student_cubes
+# tags: action, required, student_cubes, character:ivy
 # ===
 
 {DbInsert("Seen_BI_ReviewPeriod")}

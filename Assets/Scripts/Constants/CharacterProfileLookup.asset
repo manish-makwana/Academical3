@@ -29,3 +29,7 @@ MonoBehaviour:
     CharacterSO: {fileID: 11400000, guid: d8f9d55ac0a2a46fc8a7f9355e7544ff, type: 2}
   - Sprite: {fileID: 21300000, guid: 1b6044b2cbac12442985fe935fea262c, type: 3}
     CharacterSO: {fileID: 11400000, guid: 7a63f76d3a8a8ae4b92ad20d2b18d56e, type: 2}
+  - Sprite: {fileID: 21300000, guid: 1b6044b2cbac12442985fe935fea262c, type: 3}
+    CharacterSO: {fileID: 11400000, guid: 7a63f76d3a8a8ae4b92ad20d2b18d56e, type: 2}
+  - Sprite: {fileID: 21300000, guid: 6fa91156d06e869408cfe72688b9ee27, type: 3}
+    CharacterSO: {fileID: 11400000, guid: d8f28d49d920132428b98e289b546cbd, type: 2}

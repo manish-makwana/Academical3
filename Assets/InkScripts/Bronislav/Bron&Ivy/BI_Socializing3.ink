@@ -17,7 +17,7 @@ VAR JensenCrying = false
 # @end
 # hidden: true
 # repeatable: false
-# tags: action, auxiliary, student_cubes
+# tags: action, auxiliary, student_cubes, character:ivy
 # ===
 #Summary: Ivy continues pushing the deal. 
 

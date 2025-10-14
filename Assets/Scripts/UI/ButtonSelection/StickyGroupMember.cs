@@ -4,12 +4,21 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
-public class StickyGroupMember : UIBehaviour,
-    IPointerClickHandler, ISubmitHandler
+public class StickyGroupMember : UIBehaviour, IPointerClickHandler, ISubmitHandler
 {
     [Header("Grouping")]
     [SerializeField] private string groupId;
+
+    [Tooltip("Mark this button as the group's default (first default wins).")]
     [SerializeField] private bool isDefaultForGroup;
+
+    [Header("Start State")]
+    [Tooltip("If ON for this group: the group starts with no selection (no default auto-pick). First setter in the scene wins for the group.")]
+    [SerializeField] private bool startGroupUnselected = false;
+
+    [Header("Flicker Guard")]
+    [Tooltip("If ON, reselection uses a zero-fade handoff to avoid a visible flash on StandaloneInputModule.")]
+    [SerializeField] private bool useZeroFadeReselect = true;
 
     private Button _button;
     public Button Button { get { return _button; } }
@@ -23,6 +32,11 @@ public class StickyGroupMember : UIBehaviour,
     protected override void OnEnable()
     {
         base.OnEnable();
+
+        // Apply the per-group start-unselected flag (first setter wins)
+        SelectionBus.SetStartUnselected(groupId, startGroupUnselected);
+
+        // Normal registration
         SelectionBus.Register(groupId, this, isDefaultForGroup);
     }
 
@@ -44,10 +58,57 @@ public class StickyGroupMember : UIBehaviour,
         SelectionBus.RequestSelect(groupId, this);
     }
 
-    // StandaloneInputModule flicker guard: reassert selection with zero fade for this frame.
+    private bool IsActiveAndInteractable()
+    {
+        return isActiveAndEnabled && _button != null && _button.IsInteractable();
+    }
+
+    // --------- Manual controls ---------
+
+    // Enable "start unselected" now and clear current selection.
+    public void StartGroupUnselected()
+    {
+        SelectionBus.SetStartUnselected(groupId, true);
+    }
+
+    // Manually return to default (or clear if no valid default).
+    public void ResetGroupToDefault()
+    {
+        SelectionBus.ResetGroupToDefault(groupId);
+    }
+
+    // ---------- Selection helpers used by bus & guard ----------
+
+    // Called by SelectionBus to select this member with zero-fade handoff if enabled.
+    internal void SelectSelfFromBus(EventSystem es)
+    {
+        if (es == null) return;
+
+        if (useZeroFadeReselect && _button != null && _button.transition == Selectable.Transition.ColorTint)
+        {
+            var cb = _button.colors;
+            float originalFade = cb.fadeDuration;
+            if (originalFade > 0f)
+            {
+                cb.fadeDuration = 0f;
+                _button.colors = cb;
+
+                if (!es.alreadySelecting)
+                    es.SetSelectedGameObject(gameObject);
+
+                StartCoroutine(RestoreFadeEndOfFrame(originalFade));
+                return;
+            }
+        }
+
+        if (!es.alreadySelecting)
+            es.SetSelectedGameObject(gameObject);
+    }
+
+    // ---------- Background-click guard to keep sticky selection ----------
     void LateUpdate()
     {
-        // Only the group's current member enforces selection.
+        // Only enforce if we are the group's current member (after user has selected us)
         if (!SelectionBus.IsCurrent(groupId, this)) return;
         if (!IsActiveAndInteractable()) return;
 
@@ -56,48 +117,21 @@ public class StickyGroupMember : UIBehaviour,
 
         var cur = es.currentSelectedGameObject;
 
-        // If another interactable Selectable is selected, let it win (user clicked another button).
+        // If another interactable Selectable is selected (e.g., another group's button), let it win.
         if (IsInteractableSelectableGO(cur)) return;
 
-        // If selection is null or on a non-interactable/background, reselect ourselves WITHOUT a visual fade.
-        ReassertSelectionNoFade(es);
+        // Only the active group may reselect this frame (avoid cross-group tug-of-war)
+        if (!SelectionBus.ShouldGroupReselect(groupId)) return;
+
+        // Re-assert selection (zero-fade optional, same helper as bus)
+        SelectSelfFromBus(es);
+
+        SelectionBus.MarkReselectedThisFrame();
     }
 
-    private void ReassertSelectionNoFade(EventSystem es)
+    private IEnumerator RestoreFadeEndOfFrame(float originalFade)
     {
-        if (_button == null) return;
-
-        // Only needed for Color Tint; other transitions typically don't flicker here.
-        if (_button.transition == Selectable.Transition.ColorTint)
-        {
-            var cb = _button.colors;
-            if (cb.fadeDuration > 0f)
-            {
-                float originalFade = cb.fadeDuration;
-
-                // Temporarily zero fade to avoid a visible flash when selection is restored.
-                cb.fadeDuration = 0f;
-                _button.colors = cb;
-
-                if (!es.alreadySelecting)
-                    es.SetSelectedGameObject(gameObject);
-
-                // Restore fade at end of frame (after UI has updated).
-                StartCoroutine(RestoreFadeDurationEndOfFrame(originalFade));
-                return;
-            }
-        }
-
-        // Non-ColorTint or already zero fade: just reselect.
-        if (!es.alreadySelecting)
-            es.SetSelectedGameObject(gameObject);
-    }
-
-    private IEnumerator RestoreFadeDurationEndOfFrame(float originalFade)
-    {
-        // Wait until the very end so the zero-fade selection applies without any transition.
         yield return new WaitForEndOfFrame();
-
         if (_button != null)
         {
             var cb = _button.colors;
@@ -113,19 +147,12 @@ public class StickyGroupMember : UIBehaviour,
         return sel != null && sel.IsInteractable();
     }
 
-    private bool IsActiveAndInteractable()
-    {
-        return isActiveAndEnabled && _button != null && _button.IsInteractable();
-    }
-
 #if UNITY_EDITOR
     protected override void OnValidate()
     {
         base.OnValidate();
         if (string.IsNullOrEmpty(groupId))
-        {
             Debug.LogWarning(name + ": StickyGroupMember has empty groupId.");
-        }
         if (_button == null) _button = GetComponent<Button>();
     }
 #endif

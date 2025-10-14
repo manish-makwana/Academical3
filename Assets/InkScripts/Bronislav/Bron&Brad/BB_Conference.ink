@@ -7,7 +7,7 @@ VAR withdrew = false
 # date.day!5
 # @end
 # repeatable: false
-# tags: action, lecture_hall, auxiliary
+# tags: action, lecture_hall, auxiliary, character:brad
 # Summary: Brad discusses rejected paper/confronted about IRB stuff w/ Ned, talks to Bronislav about Jensen being on paper
 
 {DbInsert("Seen_BB_Conference")}
