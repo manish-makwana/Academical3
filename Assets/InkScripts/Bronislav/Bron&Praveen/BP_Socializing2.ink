@@ -1,10 +1,6 @@
 // Wishes Hendricks would ask to help with conference
 // Tell Praveen he will put in a good word for him or not
 
-VAR BP_Suggestion = false
-VAR BP_S2_Pretentious = false
-VAR BP_S2_AskDirectly = false
-
 === BP_Socializing2_SceneStart ===
 #---
 # choiceLabel: Talk with Praveen.
@@ -18,9 +14,11 @@ VAR BP_S2_AskDirectly = false
 
 // Summary: Praveen asks you to help on getting Hendrick's approval
 
-{ShowCharacter("Praveen", "left", "")}
+VAR BP_Suggestion = false
+VAR BP_S2_Pretentious = false
+VAR BP_S2_AskDirectly = false
 
-{DbInsert("Seen_BP_Socializing2")}
+{ShowCharacter("Praveen", "left", "")}
 
 You notice your friend Praveen working at his desk and decide to talk to him. It's been a while since you two have hung out.
 
@@ -398,7 +396,7 @@ Bronislav: "Yeah no problem. I'm going to head out for now, but yeah I can defin
 Praveen: "Thank you so much Bronislav, I appreciate it."
 
 {HideCharacter("Praveen")}
-
+{DbInsert("Seen_BP_Socializing2")}
 ->DONE
 
 === BP_Socializing2_MaybeNotSure ===
@@ -411,7 +409,7 @@ Bronislav: "Yeah, I'll think about it more. I'm going to head out for now, but I
 Praveen: "Okay, I would really appreciate the help though, so at least consider it."
 
 {HideCharacter("Praveen")}
-
+{DbInsert("Seen_BP_Socializing2")}
 ->DONE
 
 
@@ -427,5 +425,5 @@ Bronislav: "I think it will go better if you talk to her yourself. I'm going to 
 Praveen: "Sure, whatever, like it will make a difference."
 
 {HideCharacter("Praveen")}
-
+{DbInsert("Seen_BP_Socializing2")}
 ->DONE

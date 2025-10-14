@@ -136,6 +136,7 @@ Bronislav: "I appreciate your concern. Thank you. I have to go get an assignment
 You stand up and leave while Hendricks wears a solemn, contemplative expression as she opens her book and continues reading. 
 
 {HideCharacter("Hendricks")}
+{DbInsert("Seen_BHS5")}
 ->DONE
 
 === BH_Socializing5_ItllWorkOut ===
@@ -143,11 +144,12 @@ Bronislav: "I believe things will work out. They have to, because I need them to
 
 Hendrick frowns, but it's hard to get a read on what she's thinking.
 
-Hendricks: "Alright then. I recently had to remove Praveen from editorial work, because of his own unethical behavior. I sincerely hope that this isn't something that happens to you."
+Hendricks: "Alright then. I recently had to remove Praveen from revision work, because of his own unethical behavior. I sincerely hope that this isn't something that happens to you."
 
 Bronislav: "Oh wow, I wish things went better for him. I appreciate the concern, but I can handle it. Oh, I gotta head out to finish an assignment. I'll see you later, Professor Hendricks."
 
 {HideCharacter("Hendricks")}
+{DbInsert("Seen_BHS5")}
 ->DONE
 
 === BH_Socializing5_IllThinkAbtIt ===
@@ -160,6 +162,7 @@ Bronislav: "Oh shoot, I gotta go get an assingment done. Thanks again, Hendricks
 As you walk off you notice a solemn expression on Hendricks face as she goes back to her book.
 
 {HideCharacter("Hendricks")}
+{DbInsert("Seen_BHS5")}
 ->DONE
 
 === BH_Socializing5_ThatsIt ===
@@ -172,6 +175,7 @@ Bronislav: "Thanks for listening. Enjoy your book."
 You take a stand before waving, watching as Hendricks opens her book with a contemplative expression residing on her face. 
 
 {HideCharacter("Hendricks")}
+{DbInsert("Seen_BHS5")}
 ->DONE
 
 === BH_Socializing5_HiHen ===
@@ -213,6 +217,7 @@ Hendricks: "No problem, Bronislav. I'm here if you need anything."
 Bronislav: "Thank you. I'll see you around, Professor."
 
 {HideCharacter("Hendricks")}
+{DbInsert("Seen_BHS5")}
 ->DONE
 
 === BH_Socializing5_ThankYou ===
@@ -228,7 +233,7 @@ Hendricks pinches the bridge of her nose.
 
 Bronislav: "Did something happen?"
 
-Hendricks: "Yes, actually, I unfortunately had to take Praveen off paper editing. I wouldn't say I'm not disappointed, I thought he'd know better. It is quite unfortunate."
+Hendricks: "Yes, actually, I unfortunately had to take Praveen off peer reviewing. I wouldn't say I'm not disappointed, I thought he'd know better. It is quite unfortunate."
 
 *["Glad I didnt end up in that boat."]
 ->BH_Socializing5_GladIDidntEndUp
@@ -285,6 +290,7 @@ Bronislav: "Ah, I have to get going now. I need to finish an assignment. Thanks 
 You get up and Hendricks smiles as you leave going back to her book.
 
 {HideCharacter("Hendricks")}
+{DbInsert("Seen_BHS5")}
 ->DONE
 
 === BH_Socializing5_NopeThatsIt ===
@@ -295,5 +301,6 @@ Hendricks: "Well, I hope you have a good rest of your day, Bronislav."
 You get up, and Hendricks goes back to her book as you leave.
 
 {HideCharacter("Hendricks")}
+{DbInsert("Seen_BHS5")}
 ->DONE
 
