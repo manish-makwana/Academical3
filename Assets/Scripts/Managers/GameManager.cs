@@ -180,10 +180,19 @@ namespace Academical
 				LoadDatabaseSave( saveData );
 				LoadStoryState( saveData );
 				LoadSocialEngineState( saveData );
+
+				//Disable button if no action storylets exist
+				//TODO: Repeated code, refactor this
+				List<ActionStoryletInfo> locationStorylets = GetEligibleActionStorylets( m_CurrentLocation );
+
+				if ( locationStorylets.Count <= 0)
+				{
+					DisableActionButton();
+				}
 			}
 
 			//Set day label here, as Anansi doesn't natively support day labels.
-			m_simulationController.DateTime.DayEventLabel = DateLabelConstants.GetLabelForDay( m_simulationController.DateTime.Day );
+				m_simulationController.DateTime.DayEventLabel = DateLabelConstants.GetLabelForDay( m_simulationController.DateTime.Day );
 			m_dialogueManager.Story.DB = SocialEngineController.Instance.DB;
 
 			StartStory();
@@ -328,18 +337,21 @@ namespace Academical
 			List<ActionStoryletInfo> locationStorylets = GetEligibleActionStorylets( m_CurrentLocation );
 
 			//TODO: Don't hardcode this.
-			bool validLocation = m_CurrentLocation.UniqueID != "" && m_CurrentLocation.UniqueID != "bedroom";
+			bool validLocation = m_CurrentLocation.UniqueID != "";
 
 			if ( locationStorylets.Count <= 0 && validLocation )
 			{
 				DisableActionButton();
-				Storylet EmptyLocationStorylet = m_dialogueManager.Story.GetStorylet( m_CurrentLocation.UniqueID );
-				m_dialogueManager.RunStorylet( EmptyLocationStorylet );
+				if ( m_CurrentLocation.UniqueID != "bedroom" )
+				{
+					Storylet EmptyLocationStorylet = m_dialogueManager.Story.GetStorylet( m_CurrentLocation.UniqueID );
+					m_dialogueManager.RunStorylet( EmptyLocationStorylet );
+				}
 			}
-			else
-			{
-				EnableActionButton();
-			}
+				else
+				{
+					EnableActionButton();
+				}
 			
 			
 

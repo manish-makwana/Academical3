@@ -93,6 +93,7 @@ namespace Academical
 
 		public void OnPointerDown(PointerEventData e)
 		{
+			AudioManager.PlayDialogueButtonSound();
 			Mask.color = m_PressedColor;
 			m_IsPressed = true;
 		}
