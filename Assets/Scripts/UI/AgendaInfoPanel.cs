@@ -60,15 +60,17 @@ namespace Academical
         {
             m_OpenButtonImage.color = m_ActiveColor;
             base.Show();
-            EventSystem.current.SetSelectedGameObject( m_DefaultDayShownButton.gameObject );
             bool defaultSelected = false;
             foreach ( Button button in m_DayButtons )
             {
                 int buttonDayIdentifier = button.GetComponent<ButtonIdentifier>().Identifier;
                 if ( buttonDayIdentifier == m_SimulationController.DateTime.Day )
                 {
+                    
+                    EventSystem.current.SetSelectedGameObject( button.gameObject );
                     defaultSelected = true;
                     ShowDayContent( button.GetComponent<PanelTextContent>() );
+                    button.interactable = true;
                 }
 
                 //Strikethrough text if we are after the day
@@ -77,7 +79,13 @@ namespace Academical
                     TMP_Text buttonTMPText = button.GetComponentInChildren<TMP_Text>();
                     string buttonText = buttonTMPText.text;
                     buttonTMPText.text = "<s>" + buttonText + "</s>";
+                    button.interactable = true;
                 }
+
+                if ( buttonDayIdentifier > m_SimulationController.DateTime.Day )
+                {
+                    button.interactable = false;
+                 }
             }
             if ( !defaultSelected )
             {

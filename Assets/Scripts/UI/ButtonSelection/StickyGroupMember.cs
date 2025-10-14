@@ -10,7 +10,7 @@ public class StickyGroupMember : UIBehaviour, IPointerClickHandler, ISubmitHandl
     [SerializeField] private string groupId;
 
     [Tooltip("Mark this button as the group's default (first default wins).")]
-    [SerializeField] private bool isDefaultForGroup;
+    [SerializeField] public bool isDefaultForGroup;
 
     [Header("Start State")]
     [Tooltip("If ON for this group: the group starts with no selection (no default auto-pick). First setter in the scene wins for the group.")]

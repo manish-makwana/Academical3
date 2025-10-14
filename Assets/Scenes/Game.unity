@@ -4030,7 +4030,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groupId: agenda
   isDefaultForGroup: 0
-  startGroupUnselected: 0
+  startGroupUnselected: 1
   useZeroFadeReselect: 1
 --- !u!224 &1227631648 stripped
 RectTransform:
@@ -4838,8 +4838,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groupId: agenda
-  isDefaultForGroup: 1
-  startGroupUnselected: 0
+  isDefaultForGroup: 0
+  startGroupUnselected: 1
   useZeroFadeReselect: 1
 --- !u!114 &1626317157
 MonoBehaviour:
@@ -4855,7 +4855,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groupId: agenda
   isDefaultForGroup: 0
-  startGroupUnselected: 0
+  startGroupUnselected: 1
   useZeroFadeReselect: 1
 --- !u!224 &1643851951 stripped
 RectTransform:
@@ -8497,7 +8497,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groupId: agenda
   isDefaultForGroup: 0
-  startGroupUnselected: 0
+  startGroupUnselected: 1
   useZeroFadeReselect: 1
 --- !u!114 &1840834948
 MonoBehaviour:
@@ -8513,7 +8513,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groupId: agenda
   isDefaultForGroup: 0
-  startGroupUnselected: 0
+  startGroupUnselected: 1
   useZeroFadeReselect: 1
 --- !u!1 &1856149862 stripped
 GameObject:
@@ -8772,7 +8772,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groupId: agenda
   isDefaultForGroup: 0
-  startGroupUnselected: 0
+  startGroupUnselected: 1
   useZeroFadeReselect: 1
 --- !u!1 &2029965977 stripped
 GameObject:
